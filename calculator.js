@@ -8,7 +8,8 @@ var braking = function (velocitykmh, frictionK, reactionTime) {
     var reactionDistance = velocity*reactionTime;
     
     var deceleration = 9.8 * frictionK;
-    var deceleratingDistance = sq(velocity) /(2*deceleration) ;
+    var velocitySquared = velocity*velocity;
+    var deceleratingDistance =  velocitySquared/(2*deceleration) ;
     
     var totalDistance = reactionDistance + deceleratingDistance;
     return totalDistance;
@@ -16,8 +17,8 @@ var braking = function (velocitykmh, frictionK, reactionTime) {
 
 //the preceding car stops in front of me (it is already at the end of its reaction time), I start breaking after a bad reaction time with worse breaking system 
 
-var myBrakingSpace = braking(110, 0.75, badReactionTime); //search 95ish percentile of breaking capacity 
-var precedingBrakingSpace = braking(110, 0.95, 0); //pretty close to 1, 0.95 is very ideal, almost impossible
+var myBrakingSpace = braking(120, 0.75, badReactionTime); //search 95ish percentile of breaking capacity 
+var precedingBrakingSpace = braking(120, 0.95, 0); //pretty close to 1, 0.95 is very ideal, almost impossible
 
 var idealDistance = myBrakingSpace - precedingBrakingSpace +5; //5 meters error
-println(idealDistance);
+console.log(idealDistance);
